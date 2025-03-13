@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3 a 1</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Estrutura HTML -->
+  <header>
+    <h1 id="titulo">3 a 1</h1>
+    <p>Ferramentas essenciais para um gestor de sucesso</p>
+  </header>
+
+  <nav>
+    <a href="#conteudo">Início</a>
+    <a href="#sobre">Sobre Nós</a>
+    <a href="#contato">Contato</a>
+    <a href="#ferramentas">Ferramentas</a>
+  </nav>
+
+  <section id="conteudo" class="secao">
+    <h2>Início</h2>
+    <p>
+      A gestão eficiente é a chave para o sucesso de qualquer organização. Este site oferece ferramentas e recursos para ajudar gestores a tomarem decisões mais assertivas, melhorarem a produtividade e promoverem um ambiente de trabalho inclusivo e colaborativo.
+    </p>
+  </section>
+
+  <section id="sobre" class="secao">
+    <h2>Sobre Nós</h2>
+    <p>
+      Somos uma empresa que visa facilitar a entrada no meio de trabalho para pessoas com limitações visuais de uma forma leve e descontraída.
+    </p>
+  </section>
+
+  <section id="contato" class="secao">
+    <h2>Contato</h2>
+    <p>
+      Para mais informações, entre em contato conosco através do e-mail: 
+      <a href="mailto:contato@3a1.com.br">contato@3a1.com.br</a>.
+    </p>
+  </section>
+
+  <section id="ferramentas" class="secao">
+    <h2>Ferramentas</h2>
+    <p>
+      Explore nossas ferramentas interativas para melhorar suas habilidades de gestão.
+    </p>
+
+    <h3>Gerador de Tarefas Prioritárias</h3>
+    <p>
+      Clique no botão abaixo para gerar uma lista de tarefas prioritárias para o seu dia.
+    </p>
+    <button id="gerarTarefas">Gerar Tarefas</button>
+    <div id="tarefasContainer"></div>
+
+    <h3>Questões sobre Gestão</h3>
+    <p>
+      Clique no botão abaixo para ver 3 questões sobre gestão. Nenhuma questão será repetida até que todas tenham sido mostradas.
+    </p>
+    <button id="btnQuestoes">Mostrar 3 Questões</button>
+    <div id="questoesContainer"></div>
+  </section>
+
+  <footer>
+    <p>&copy; 2023 3 a 1. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Função para falar o texto
+    function falarTexto(texto) {
+      const mensagem = new SpeechSynthesisUtterance(texto);
+      mensagem.lang = 'pt-BR';
+      mensagem.rate = 1.0; // Velocidade da fala (1.0 é normal)
+      mensagem.pitch = 1.0; // Tom da voz (1.0 é normal)
+      speechSynthesis.speak(mensagem);
+    }
+
+    // Função para falar o conteúdo de uma seção específica
+    function falarSecao(secaoId) {
+      const secao = document.getElementById(secaoId);
+      if (secao) {
+        // Captura apenas o texto da seção, excluindo o texto de outras partes da página
+        const texto = secao.querySelector('h2').innerText + ". " + secao.querySelector('p').innerText;
+        falarTexto(texto); // Fala o texto da seção
+      }
+    }
+
+    // Observador de eventos para os links do menu
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // Evita o comportamento padrão do link
+        const secaoId = link.getAttribute('href').substring(1); // Remove o '#' do href
+        falarSecao(secaoId); // Fala o conteúdo da seção
+        window.location.hash = `#${secaoId}`; // Atualiza o hash da URL
+      });
+    });
+
+    // Lista de tarefas prioritárias
+    const tarefas = [
+      "Revisar o planejamento estratégico da empresa.",
+      "Realizar reunião de alinhamento com a equipe.",
+      "Analisar os indicadores de desempenho do último trimestre.",
+      "Otimizar processos internos para aumentar a eficiência.",
+      "Preparar relatório financeiro para a diretoria.",
+      "Capacitar a equipe em novas tecnologias.",
+      "Avaliar o clima organizacional da empresa.",
+      "Implementar ações de sustentabilidade.",
+      "Desenvolver um plano de carreira para os colaboradores.",
+      "Revisar o orçamento do próximo semestre."
+    ];
+
+    // Lista de questões sobre gestão
+    const todasQuestoes = [
+      "Quais são os principais pilares da gestão estratégica?",
+      "Como a comunicação eficaz impacta a produtividade da equipe?",
+      "Quais são os benefícios da gestão por indicadores (KPIs)?",
+      "Como promover a inclusão e diversidade no ambiente de trabalho?",
+      "Quais são as melhores práticas para a gestão de conflitos?",
+      "Como a tecnologia pode melhorar a gestão de processos?",
+      "Quais são os desafios da gestão de equipes remotas?",
+      "Como desenvolver um plano de sucessão na empresa?",
+      "Quais são os impactos da gestão financeira no sucesso da organização?",
+      "Como a gestão de mudanças pode ser aplicada em projetos complexos?"
+    ];
+
+    let questoesDisponiveis = [...todasQuestoes];
+
+    // Função para selecionar 3 questões aleatórias
+    function selecionarTresQuestoes() {
+      if (questoesDisponiveis.length < 3) {
+        return ["Todas as questões foram mostradas. Recarregue a página para reiniciar."];
+      }
+      const questoesSelecionadas = [];
+      for (let i = 0; i < 3; i++) {
+        const indice = Math.floor(Math.random() * questoesDisponiveis.length);
+        questoesSelecionadas.push(questoesDisponiveis[indice]);
+        questoesDisponiveis.splice(indice, 1);
+      }
+      return questoesSelecionadas;
+    }
+
+    // Função para exibir as questões na tela
+    function exibirQuestoes(questoes) {
+      const container = document.getElementById('questoesContainer');
+      container.innerHTML = "";
+      questoes.forEach((questao, index) => {
+        const divQuestao = document.createElement('div');
+        divQuestao.className = 'questao';
+        divQuestao.textContent = `${index + 1}. ${questao}`;
+        container.appendChild(divQuestao);
+        falarTexto(questao); // Fala cada questão
+      });
+    }
+
+    // Função para gerar tarefas prioritárias
+    function gerarTarefas() {
+      const container = document.getElementById('tarefasContainer');
+      container.innerHTML = "";
+      for (let i = 0; i < 3; i++) {
+        const tarefa = tarefas[Math.floor(Math.random() * tarefas.length)];
+        const divTarefa = document.createElement('div');
+        divTarefa.className = 'questao';
+        divTarefa.textContent = `${i + 1}. ${tarefa}`;
+        container.appendChild(divTarefa);
+        falarTexto(tarefa); // Fala cada tarefa
+      }
+    }
+
+    // Eventos
+    document.getElementById('btnQuestoes').addEventListener('click', () => {
+      const questoes = selecionarTresQuestoes();
+      exibirQuestoes(questoes);
+    });
+
+    document.getElementById('gerarTarefas').addEventListener('click', gerarTarefas);
+
+    // Fala o título e conteúdo ao carregar a página
+    window.onload = function() {
+      falarTexto(document.getElementById('titulo').innerText);
+      setTimeout(() => falarTexto(document.getElementById('conteudo').innerText), 3000);
+    };
+  </script>
+</body>
+</html>
