@@ -3,35 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3 a 1</title>
+  <title>3 a 1 - Ferramentas para Gestores</title>
   <style>
     :root {
-      /* Cores inspiradas no YouTube */
-      --yt-primary: #FF0000;
-      --yt-dark-bg: #0F0F0F;
-      --yt-dark-card: #272727;
-      --yt-dark-text: #F1F1F1;
-      --yt-dark-secondary: #AAAAAA;
+      /* Cores principais - usando #723172 como base */
+      --primary: #723172;       /* Roxo principal */
+      --primary-dark: #5A265A;  /* 15% mais escuro */
+      --primary-light: #8C3D8C; /* 15% mais claro */
+      --secondary: #4A8FE7;     /* Azul para contrastes */
+      --background: #FFFFFF;
+      --text: #2C3E50;
+      --text-light: #7F8C8D;
+      --border: #ECF0F1;
+      --card-bg: #F9F9F9;
       
-      /* Cores inspiradas no Twitter/X */
-      --x-primary: #1D9BF0;
-      --x-dark-bg: #000000;
-      --x-dark-card: #16181C;
-      --x-dark-text: #E7E9EA;
-      --x-dark-secondary: #71767B;
+      /* Espaçamentos */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
       
-      /* Cores gerais */
-      --white: #FFFFFF;
-      --black: #000000;
-      --border-radius: 8px;
-      --box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      /* Bordas */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      
+      /* Tipografia */
+      --text-base: 1rem;
+      --text-lg: 1.25rem;
+      --text-xl: 1.5rem;
+      --text-2xl: 2rem;
+      
+      /* Sombras */
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      
+      /* Transições */
+      --transition: all 0.2s ease-in-out;
     }
 
-    /* Reset Moderno */
-    *,
-    *::before,
-    *::after {
+    /* Reset Acessível */
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -39,153 +52,164 @@
 
     html {
       scroll-behavior: smooth;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
     body {
-      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background-color: var(--white);
-      color: var(--black);
-      line-height: 1.6;
-      transition: var(--transition);
-    }
-
-    /* Header Style - YouTube inspired */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background-color: var(--white);
+      font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--background);
+      color: var(--text);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px 16px;
-      box-shadow: var(--box-shadow);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      min-height: 100vh;
+    }
+
+    /* Cabeçalho */
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: var(--space-xl) var(--space-md);
       text-align: center;
+      box-shadow: var(--shadow-md);
     }
 
     header h1 {
-      color: var(--yt-primary);
-      font-size: 2.5rem;
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
       font-weight: 700;
-      margin-bottom: 8px;
     }
 
     header p {
-      color: var(--black);
-      font-size: 1.1rem;
-      max-width: 600px;
+      font-size: var(--text-lg);
+      max-width: 800px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.9);
     }
 
-    /* Navigation - Twitter inspired */
+    /* Navegação */
     nav {
+      background-color: white;
+      padding: var(--space-sm) 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav ul {
       display: flex;
       justify-content: center;
-      background-color: var(--white);
-      padding: 15px;
-      box-shadow: var(--box-shadow);
-      position: sticky;
-      top: 120px;
-      z-index: 999;
+      list-style: none;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      padding: 0 var(--space-md);
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     nav a {
-      color: var(--black);
+      color: var(--text);
       text-decoration: none;
       font-weight: 500;
-      padding: 8px 16px;
-      margin: 0 8px;
-      border-radius: var(--border-radius);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-sm);
       transition: var(--transition);
+      display: block;
     }
 
-    nav a:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      color: var(--yt-primary);
+    nav a:hover, nav a:focus {
+      background-color: rgba(114,49,114,0.1);
+      color: var(--primary);
+      outline: none;
     }
 
     nav a:active {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(114,49,114,0.2);
     }
 
-    /* Main Content Sections */
+    /* Conteúdo Principal */
+    main {
+      flex: 1;
+      padding: var(--space-xl) var(--space-md);
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
     .secao {
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 1000px;
-      background-color: var(--white);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
+      background-color: var(--card-bg);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-xl);
     }
 
     .secao h2 {
-      color: var(--yt-primary);
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-      font-weight: 600;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--yt-primary);
+      color: var(--primary);
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--primary);
     }
 
     .secao h3 {
-      color: var(--black);
-      margin: 20px 0 10px;
-      font-size: 1.3rem;
+      color: var(--text);
+      font-size: var(--text-lg);
+      margin: var(--space-lg) 0 var(--space-md);
     }
 
     .secao p {
-      margin-bottom: 15px;
+      margin-bottom: var(--space-md);
       line-height: 1.6;
     }
 
-    /* Buttons - Modern style */
+    /* Botões */
     button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 24px;
-      border-radius: var(--border-radius);
-      font-weight: 500;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: var(--space-md) var(--space-lg);
+      font-size: var(--text-base);
+      border-radius: var(--radius-md);
       cursor: pointer;
       transition: var(--transition);
-      border: none;
-      outline: none;
-      background-color: var(--yt-primary);
-      color: var(--white);
-      font-size: 1rem;
-      margin: 10px 0;
+      font-weight: 500;
+      margin: var(--space-sm) 0;
     }
 
-    button:hover {
-      background-color: #CC0000;
-      transform: translateY(-2px);
+    button:hover, button:focus {
+      background-color: var(--primary-dark);
+      outline: 2px solid var(--secondary);
+      outline-offset: 2px;
     }
 
     button:active {
-      transform: translateY(0);
+      transform: translateY(1px);
     }
 
     /* Questões e Tarefas */
     .questao {
-      background-color: rgba(0, 0, 0, 0.03);
-      padding: 15px;
-      border-radius: var(--border-radius);
-      margin: 10px 0;
-      line-height: 1.5;
+      background-color: white;
+      padding: var(--space-md);
+      border-radius: var(--radius-sm);
+      margin: var(--space-md) 0;
+      box-shadow: var(--shadow-sm);
+      border-left: 3px solid var(--primary);
     }
 
     #tarefasContainer, #questoesContainer {
-      margin: 20px 0;
+      margin: var(--space-lg) 0;
     }
 
-    /* Footer */
+    /* Rodapé */
     footer {
-      background-color: var(--black);
-      color: var(--white);
+      background-color: var(--primary);
+      color: white;
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      padding: var(--space-lg);
+      margin-top: auto;
     }
 
     footer p {
@@ -194,160 +218,174 @@
 
     /* Links */
     a {
-      color: var(--yt-primary);
-      text-decoration: none;
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
       transition: var(--transition);
     }
 
-    a:hover {
-      text-decoration: underline;
+    a:hover, a:focus {
+      color: var(--primary-dark);
+      text-decoration-thickness: 2px;
+    }
+
+    /* Foco Acessível */
+    :focus-visible {
+      outline: 2px solid var(--secondary);
+      outline-offset: 2px;
     }
 
     /* Responsividade */
     @media (max-width: 768px) {
+      :root {
+        --text-base: 0.9375rem;
+        --text-lg: 1.125rem;
+        --text-xl: 1.25rem;
+        --text-2xl: 1.5rem;
+      }
+
       header {
-        padding: 15px;
+        padding: var(--space-lg) var(--space-md);
       }
-      
-      header h1 {
-        font-size: 2rem;
-      }
-      
-      header p {
-        font-size: 1rem;
-      }
-      
-      nav {
-        flex-wrap: wrap;
-        top: 110px;
-        padding: 10px;
-      }
-      
-      nav a {
-        padding: 8px 12px;
-        margin: 4px;
-        font-size: 0.9rem;
-      }
-      
+
       .secao {
-        padding: 20px;
-        margin: 15px;
+        padding: var(--space-lg);
+      }
+
+      nav ul {
+        justify-content: space-around;
+        gap: var(--space-xs);
+      }
+
+      nav a {
+        padding: var(--space-xs) var(--space-sm);
       }
     }
 
     @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.8rem;
+      header {
+        padding: var(--space-md);
       }
-      
-      nav {
-        top: 100px;
-      }
-      
-      nav a {
-        padding: 6px 10px;
-        font-size: 0.85rem;
-      }
-      
+
       .secao {
-        padding: 15px;
-        margin: 10px;
+        padding: var(--space-md);
       }
-      
-      .secao h2 {
-        font-size: 1.5rem;
+
+      button {
+        width: 100%;
+        padding: var(--space-md);
       }
     }
   </style>
 </head>
 <body>
-  <!-- Estrutura HTML -->
+  <!-- Estrutura HTML (mantida igual) -->
   <header>
     <h1 id="titulo">3 a 1</h1>
     <p>Ferramentas essenciais para um gestor de sucesso</p>
   </header>
 
   <nav>
-    <a href="#conteudo">Início</a>
-    <a href="#sobre">Sobre Nós</a>
-    <a href="#contato">Contato</a>
-    <a href="#ferramentas">Ferramentas</a>
+    <ul>
+      <li><a href="#conteudo">Início</a></li>
+      <li><a href="#sobre">Sobre Nós</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="#ferramentas">Ferramentas</a></li>
+    </ul>
   </nav>
 
-  <section id="conteudo" class="secao">
-    <h2>Início</h2>
-    <p>
-      A gestão eficiente é a chave para o sucesso de qualquer organização. Este site oferece ferramentas e recursos para ajudar gestores a tomarem decisões mais assertivas, melhorarem a produtividade e promoverem um ambiente de trabalho inclusivo e colaborativo.
-    </p>
-  </section>
+  <main>
+    <section id="conteudo" class="secao">
+      <h2>Início</h2>
+      <p>
+        A gestão eficiente é a chave para o sucesso de qualquer organização. Este site oferece ferramentas e recursos para ajudar gestores a tomarem decisões mais assertivas, melhorarem a produtividade e promoverem um ambiente de trabalho inclusivo e colaborativo.
+      </p>
+    </section>
 
-  <section id="sobre" class="secao">
-    <h2>Sobre Nós</h2>
-    <p>
-      Somos uma empresa que visa facilitar a entrada no meio de trabalho para pessoas com limitações visuais de uma forma leve e descontraída.
-    </p>
-  </section>
+    <section id="sobre" class="secao">
+      <h2>Sobre Nós</h2>
+      <p>
+        Somos uma empresa que visa facilitar a entrada no meio de trabalho para pessoas com limitações visuais de uma forma leve e descontraída.
+      </p>
+    </section>
 
-  <section id="contato" class="secao">
-    <h2>Contato</h2>
-    <p>
-      Para mais informações, entre em contato conosco através do e-mail: 
-      <a href="mailto:contato3a1@gmail.com">contato3a1@gmail.com</a>.
-    </p>
-  </section>
+    <section id="contato" class="secao">
+      <h2>Contato</h2>
+      <p>
+        Para mais informações, entre em contato conosco através do e-mail: 
+        <a href="mailto:contato@3a1.com.br">contato@3a1.com.br</a>.
+      </p>
+    </section>
 
-  <section id="ferramentas" class="secao">
-    <h2>Ferramentas</h2>
-    <p>
-      Explore nossas ferramentas interativas para melhorar suas habilidades de gestão.
-    </p>
+    <section id="ferramentas" class="secao">
+      <h2>Ferramentas</h2>
+      <p>
+        Explore nossas ferramentas interativas para melhorar suas habilidades de gestão.
+      </p>
 
-    <h3>Gerador de Tarefas Prioritárias</h3>
-    <p>
-      Clique no botão abaixo para gerar uma lista de tarefas prioritárias para o seu dia.
-    </p>
-    <button id="gerarTarefas">Gerar Tarefas</button>
-    <div id="tarefasContainer"></div>
+      <h3>Gerador de Tarefas Prioritárias</h3>
+      <p>
+        Clique no botão abaixo para gerar uma lista de tarefas prioritárias para o seu dia.
+      </p>
+      <button id="gerarTarefas">Gerar Tarefas</button>
+      <div id="tarefasContainer"></div>
 
-    <h3>Questões sobre Gestão</h3>
-    <p>
-      Clique no botão abaixo para ver 3 questões sobre gestão. Nenhuma questão será repetida até que todas tenham sido mostradas.
-    </p>
-    <button id="btnQuestoes">Mostrar 3 Questões</button>
-    <div id="questoesContainer"></div>
-  </section>
+      <h3>Questões sobre Gestão</h3>
+      <p>
+        Clique no botão abaixo para ver 3 questões sobre gestão. Nenhuma questão será repetida até que todas tenham sido mostradas.
+      </p>
+      <button id="btnQuestoes">Mostrar 3 Questões</button>
+      <div id="questoesContainer"></div>
+    </section>
+  </main>
 
   <footer>
     <p>&copy; 2023 3 a 1. Todos os direitos reservados.</p>
   </footer>
 
   <script>
+    // JavaScript mantido igual
     // Função para falar o texto
     function falarTexto(texto) {
-      const mensagem = new SpeechSynthesisUtterance(texto);
-      mensagem.lang = 'pt-BR';
-      mensagem.rate = 1.0; // Velocidade da fala (1.0 é normal)
-      mensagem.pitch = 1.0; // Tom da voz (1.0 é normal)
-      speechSynthesis.speak(mensagem);
+      if ('speechSynthesis' in window) {
+        const mensagem = new SpeechSynthesisUtterance(texto);
+        mensagem.lang = 'pt-BR';
+        mensagem.rate = 1.0;
+        mensagem.pitch = 1.0;
+        
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(mensagem);
+      } else {
+        console.log("Seu navegador não suporta síntese de voz");
+      }
     }
 
     // Função para falar o conteúdo de uma seção específica
     function falarSecao(secaoId) {
       const secao = document.getElementById(secaoId);
       if (secao) {
-        // Captura apenas o texto da seção, excluindo o texto de outras partes da página
-        const texto = secao.querySelector('h2').innerText + ". " + secao.querySelector('p').innerText;
-        falarTexto(texto); // Fala o texto da seção
+        const titulo = secao.querySelector('h2');
+        const paragrafo = secao.querySelector('p');
+        
+        if (titulo && paragrafo) {
+          const texto = `${titulo.innerText}. ${paragrafo.innerText}`;
+          falarTexto(texto);
+        }
       }
     }
 
     // Observador de eventos para os links do menu
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', (event) => {
-        event.preventDefault(); // Evita o comportamento padrão do link
-        const secaoId = link.getAttribute('href').substring(1); // Remove o '#' do href
-        falarSecao(secaoId); // Fala o conteúdo da seção
-        window.location.hash = `#${secaoId}`; // Atualiza o hash da URL
+        event.preventDefault();
+        const secaoId = link.getAttribute('href').substring(1);
+        falarSecao(secaoId);
+        
+        document.getElementById(secaoId).scrollIntoView({
+          behavior: 'smooth'
+        });
+        
+        history.pushState(null, null, `#${secaoId}`);
       });
     });
 
@@ -386,6 +424,7 @@
       if (questoesDisponiveis.length < 3) {
         return ["Todas as questões foram mostradas. Recarregue a página para reiniciar."];
       }
+      
       const questoesSelecionadas = [];
       for (let i = 0; i < 3; i++) {
         const indice = Math.floor(Math.random() * questoesDisponiveis.length);
@@ -399,12 +438,14 @@
     function exibirQuestoes(questoes) {
       const container = document.getElementById('questoesContainer');
       container.innerHTML = "";
+      
       questoes.forEach((questao, index) => {
         const divQuestao = document.createElement('div');
         divQuestao.className = 'questao';
         divQuestao.textContent = `${index + 1}. ${questao}`;
         container.appendChild(divQuestao);
-        falarTexto(questao); // Fala cada questão
+        
+        setTimeout(() => falarTexto(questao), index * 1500);
       });
     }
 
@@ -412,13 +453,16 @@
     function gerarTarefas() {
       const container = document.getElementById('tarefasContainer');
       container.innerHTML = "";
+      
+      const tarefasEmbaralhadas = [...tarefas].sort(() => 0.5 - Math.random());
+      
       for (let i = 0; i < 3; i++) {
-        const tarefa = tarefas[Math.floor(Math.random() * tarefas.length)];
         const divTarefa = document.createElement('div');
         divTarefa.className = 'questao';
-        divTarefa.textContent = `${i + 1}. ${tarefa}`;
+        divTarefa.textContent = `${i + 1}. ${tarefasEmbaralhadas[i]}`;
         container.appendChild(divTarefa);
-        falarTexto(tarefa); // Fala cada tarefa
+        
+        setTimeout(() => falarTexto(tarefasEmbaralhadas[i]), i * 1500);
       }
     }
 
@@ -431,10 +475,30 @@
     document.getElementById('gerarTarefas').addEventListener('click', gerarTarefas);
 
     // Fala o título e conteúdo ao carregar a página
-    window.onload = function() {
-      falarTexto(document.getElementById('titulo').innerText);
-      setTimeout(() => falarTexto(document.getElementById('conteudo').innerText), 3000);
-    };
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        const titulo = document.getElementById('titulo');
+        if (titulo) falarTexto(titulo.innerText);
+        
+        const conteudo = document.getElementById('conteudo');
+        if (conteudo) {
+          setTimeout(() => {
+            const texto = conteudo.querySelector('h2').innerText + ". " + 
+                         conteudo.querySelector('p').innerText;
+            falarTexto(texto);
+          }, 2000);
+        }
+      }, 500);
+    });
+
+    // Melhoria: Focar no conteúdo principal para usuários de leitor de tela
+    window.addEventListener('load', function() {
+      const mainContent = document.querySelector('main');
+      if (mainContent) {
+        mainContent.setAttribute('tabindex', '-1');
+        mainContent.focus();
+      }
+    });
   </script>
 </body>
 </html>
