@@ -4,7 +4,261 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3 a 1</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      /* Cores inspiradas no YouTube */
+      --yt-primary: #FF0000;
+      --yt-dark-bg: #0F0F0F;
+      --yt-dark-card: #272727;
+      --yt-dark-text: #F1F1F1;
+      --yt-dark-secondary: #AAAAAA;
+      
+      /* Cores inspiradas no Twitter/X */
+      --x-primary: #1D9BF0;
+      --x-dark-bg: #000000;
+      --x-dark-card: #16181C;
+      --x-dark-text: #E7E9EA;
+      --x-dark-secondary: #71767B;
+      
+      /* Cores gerais */
+      --white: #FFFFFF;
+      --black: #000000;
+      --border-radius: 8px;
+      --box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Reset Moderno */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+
+    /* Header Style - YouTube inspired */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+      box-shadow: var(--box-shadow);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    header h1 {
+      color: var(--yt-primary);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--black);
+      font-size: 1.1rem;
+      max-width: 600px;
+    }
+
+    /* Navigation - Twitter inspired */
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: var(--white);
+      padding: 15px;
+      box-shadow: var(--box-shadow);
+      position: sticky;
+      top: 120px;
+      z-index: 999;
+    }
+
+    nav a {
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      margin: 0 8px;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: var(--yt-primary);
+    }
+
+    nav a:active {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Main Content Sections */
+    .secao {
+      padding: 30px;
+      margin: 20px auto;
+      max-width: 1000px;
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .secao h2 {
+      color: var(--yt-primary);
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--yt-primary);
+    }
+
+    .secao h3 {
+      color: var(--black);
+      margin: 20px 0 10px;
+      font-size: 1.3rem;
+    }
+
+    .secao p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    /* Buttons - Modern style */
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      outline: none;
+      background-color: var(--yt-primary);
+      color: var(--white);
+      font-size: 1rem;
+      margin: 10px 0;
+    }
+
+    button:hover {
+      background-color: #CC0000;
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    /* Questões e Tarefas */
+    .questao {
+      background-color: rgba(0, 0, 0, 0.03);
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+
+    #tarefasContainer, #questoesContainer {
+      margin: 20px 0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* Links */
+    a {
+      color: var(--yt-primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+        top: 110px;
+        padding: 10px;
+      }
+      
+      nav a {
+        padding: 8px 12px;
+        margin: 4px;
+        font-size: 0.9rem;
+      }
+      
+      .secao {
+        padding: 20px;
+        margin: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      nav {
+        top: 100px;
+      }
+      
+      nav a {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+      }
+      
+      .secao {
+        padding: 15px;
+        margin: 10px;
+      }
+      
+      .secao h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Estrutura HTML -->
